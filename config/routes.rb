@@ -9,5 +9,5 @@ Rails.application.routes.draw do
   post 'database_resets', to: 'database_resets#create', as: :database_reset
 
   # Root route
-  root "pdf_imports#new"
+  root "pdf_imports#index"
 end
