@@ -1,0 +1,47 @@
+<h1>Extracted Emails</h1>
+
+<% if notice %>
+  <p style="color: green;"><%= notice %></p>
+<% end %>
+
+<% @issues.each do |issue| %>
+  <div style="margin-bottom: 2em;">
+    <h2>Issue <%= issue.issue_number.presence || "Unknown" %></h2>
+    <p><strong>File:</strong> <%= issue.file_name %></p>
+
+    <% issue.productions.each do |production| %>
+      <h3 style="margin-top: 1em;">Production: <%= production.name %></h3>
+      <table border="1" cellpadding="6" cellspacing="0" style="border-collapse: collapse;">
+        <thead style="background-color: #f0f0f0;">
+          <tr>
+            <th>Email Address</th>
+            <th>Created At</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% production.emails.each do |email| %>
+            <tr>
+              <td><%= email.address %></td>
+              <td><%= email.created_at.strftime("%b %d, %Y %H:%M") %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+<% end %>
+
+<p><%= link_to "Upload another PDF", new_pdf_import_path %></p>
+
+<% if Rails.env.development? %>
+  <div class="alert alert-warning mb-3">
+    <strong>Development Mode:</strong>
+    <%= button_to "🗑️ Reset Database (Drop/Create/Migrate)", 
+                  database_reset_path, 
+                  method: :post,
+                  data: { 
+                    turbo_confirm: "Are you sure? This will DELETE ALL DATA and reset the database!" 
+                  },
+                  class: "btn btn-danger btn-sm" %>
+  </div>
+<% end %>

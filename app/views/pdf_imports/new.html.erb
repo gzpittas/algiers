@@ -1,0 +1,18 @@
+<h1>Upload a PDF</h1>
+
+<%= form_with url: pdf_imports_path, local: true, multipart: true do |f| %>
+  <div>
+    <%= f.label :pdf_file, "Choose a PDF file" %><br>
+    <%= f.file_field :pdf_file, accept: "application/pdf" %>
+  </div>
+
+  <div style="margin-top: 1em;">
+    <%= f.submit "Upload and Extract Emails" %>
+  </div>
+<% end %>
+
+<% if notice %>
+  <p style="color: green;"><%= notice %></p>
+<% elsif alert %>
+  <p style="color: red;"><%= alert %></p>
+<% end %>
