@@ -66,4 +66,4 @@ gem "devise", "~> 4.9"
 
 gem "pdf-reader", "~> 2.15"
 
-gem "mail", "~> 2.8"
+gem "mail", "~> 2.9"
